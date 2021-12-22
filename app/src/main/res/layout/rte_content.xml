@@ -1,19 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:gravity="top"
+        android:hint="Title"
+        android:imeOptions="actionDone|flagNoEnterAction"
+        android:inputType="textAutoCorrect|textCapSentences"
+        android:maxLines="1" />
+
+    <!--    <include layout="@layout/horizontal_separator" />-->
 
     <com.onegravity.rteditor.RTEditText
         android:id="@+id/rtEditText_1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@android:color/transparent"
         android:fontFamily="@font/lato"
         android:gravity="top"
+        android:hint="Type your note"
+        android:imeOptions="actionDone|flagNoEnterAction"
+        android:inputType="textMultiLine|textAutoCorrect|textCapSentences" />
+
+    <!--    <include layout="@layout/horizontal_separator" />-->
+
+    <com.onegravity.rteditor.RTEditText
+        android:id="@+id/rtEditText_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:hint="This is the rich text editor"
+        android:gravity="top"
+        android:hint="Signature"
         android:imeOptions="actionDone|flagNoEnterAction"
         android:inputType="textMultiLine|textAutoCorrect|textCapSentences" />
 
