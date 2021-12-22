@@ -7,18 +7,21 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import com.onegravity.rteditor.utils.Helper
 import com.onegravity.rteditor.utils.io.IOUtils
 import java.io.*
 import java.lang.Exception
+import android.os.StrictMode
+import java.lang.reflect.Method
 
 
 object FileHelper {
     private val PICK_DIRECTORY_INTENTS = arrayOf(
-        arrayOf("org.openintents.action.PICK_DIRECTORY", "content://"),
-        arrayOf("com.estrongs.action.PICK_DIRECTORY", "content://"),
+        arrayOf("org.openintents.action.PICK_DIRECTORY", "file://"),
+        arrayOf("com.estrongs.action.PICK_DIRECTORY", "file://"),
         arrayOf(Intent.ACTION_PICK, "folder://"),
-        arrayOf("com.androidworkz.action.PICK_DIRECTORY", "content://")
+        arrayOf("com.androidworkz.action.PICK_DIRECTORY", "file://")
     )
 
     /**
@@ -32,14 +35,26 @@ object FileHelper {
         for (intent in PICK_DIRECTORY_INTENTS) {
             val intentAction = intent[0]
             val uriPrefix = intent[1]
+
+//            val uri = FileProvider.getUriForFile(
+//                activity,
+//                BuildConfig.APPLICATION_ID + ".provider",
+//                startPath
+//            )
+
+
             val startIntent = Intent(intentAction)
 //                .putExtra("org.openintents.extra.TITLE", activity.getString(R.string.save_as))
                 .putExtra("org.openintents.extra.TITLE", "Save as...")
                 .setData(Uri.parse(uriPrefix + startPath.path))
                 .setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
+            val m: Method = StrictMode::class.java.getMethod("disableDeathOnFileUriExposure")
+            m.invoke(null)
             try {
                 if (startIntent.resolveActivity(packageMgr) != null) {
                     activity.startActivityForResult(startIntent, requestCode)
+
                     return true
                 }
             } catch (e: ActivityNotFoundException) {
