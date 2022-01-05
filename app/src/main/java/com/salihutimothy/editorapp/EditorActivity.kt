@@ -18,8 +18,11 @@ import com.onegravity.rteditor.api.format.RTFormat
 import android.app.Activity
 import android.widget.EditText
 import android.widget.Toast
+import com.onegravity.rteditor.RTToolbarListener
+import com.onegravity.rteditor.effects.Effect
 
 import com.onegravity.rteditor.media.MediaUtils
+import com.onegravity.rteditor.spans.RTSpan
 import com.salihutimothy.editorapp.FileHelper.load
 import com.salihutimothy.editorapp.FileHelper.save
 
@@ -72,8 +75,11 @@ class EditorActivity : EditorBaseActivity() {
 //        val rtToolbar2 = findViewById<View>(R.id.rte_toolbar_paragraph) as RTToolbar
 
         rtManager.registerToolbar(toolbarContainer, rtToolbar)
+
+
 //        rtManager.registerToolbar(toolbarContainer, rtToolbar1)
 //        rtManager.registerToolbar(toolbarContainer, rtToolbar2)
+
 
         noteEditor = findViewById(R.id.rtEditText_1)
         subjectEditor = findViewById(R.id.subject)
